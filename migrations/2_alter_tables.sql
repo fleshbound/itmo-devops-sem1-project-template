@@ -1,0 +1,7 @@
+\c "project-sem-1";
+
+ALTER TABLE prices ALTER COLUMN name TYPE TEXT;
+ALTER TABLE prices ALTER COLUMN category TYPE TEXT;
+ALTER TABLE prices ALTER COLUMN price TYPE NUMERIC(12,2);
+ALTER TABLE prices ALTER COLUMN create_date TYPE DATE;
+ALTER TABLE prices ALTER COLUMN price TYPE NUMERIC(12,2) USING price::numeric;
