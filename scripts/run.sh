@@ -51,9 +51,7 @@ export POSTGRES_DATABASE="$DB_NAME"
 export POSTGRES_USER="$DB_USER"
 export POSTGRES_PASSWORD="$DB_PASSWORD"
 
-LOG_FILE="${ROOT_DIR}/logs/logs.txt"
-
-nohup go run ./cmd/web/main.go > "$LOG_FILE" 2>&1 &
+nohup go run ./cmd/web/main.go > /dev/null 2>&1 &
 echo $! > "$PID_FILE"
 
 echo "[run] waiting for http://localhost:8080/ping ..."
@@ -65,6 +63,5 @@ for i in $(seq 1 60); do
   sleep 1
 done
 
-echo "[run] ERROR: app didn't become ready. Last logs:" >&2
-tail -n 200 "$LOG_FILE" >&2 || true
+echo "[run] ERROR: app didn't become ready." >&2
 exit 1
