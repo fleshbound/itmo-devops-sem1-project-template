@@ -2,3 +2,5 @@ logs/logs.txt
 .env
 supermarket-app
 sample_data.zip
+.api.pid
+nohup.out
