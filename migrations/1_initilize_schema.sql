@@ -3,6 +3,6 @@ CREATE TABLE IF NOT EXISTS prices (
   name text,
   category text,
   price int,
-  created_dt date
+  create_date date
 );
 
