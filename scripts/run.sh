@@ -53,7 +53,7 @@ export POSTGRES_PASSWORD="$DB_PASSWORD"
 
 LOG_FILE="${ROOT_DIR}/logs/logs.txt"
 
-nohup go run ./cmd/web/main.go >> "$LOG_FILE" 2>&1 &
+nohup go run ./cmd/web/main.go > "$LOG_FILE" 2>&1 &
 echo $! > "$PID_FILE"
 
 echo "[run] waiting for http://localhost:8080/ping ..."
