@@ -21,10 +21,10 @@ func NewProductRepo(db *sqlx.DB) *PostgresProductRepo {
 }
 
 const (
-	productGetQuery              = "SELECT * FROM prices"
+	productGetQuery              = "SELECT id, create_date, name, category, price FROM prices"
 	productGetPriceSumQuery      = "SELECT COALESCE(SUM(price), 0) FROM prices"
 	productGetCategoryCountQuery = "SELECT COUNT(DISTINCT category) FROM prices"
-	productInsertBatchQuery      = "INSERT INTO prices (id, create_date, name, category, price) VALUES ($1, $2, $3, $4, $5)"
+	productInsertBatchQuery      = "INSERT INTO prices (create_date, name, category, price) VALUES ($1, $2, $3, $4)"
 )
 
 func (repo *PostgresProductRepo) Get(ctx context.Context) ([]model.Product, error) {
@@ -55,7 +55,6 @@ func (repo *PostgresProductRepo) CreateBatch(ctx context.Context, products []mod
 		pgProduct := entity.NewPgProduct(product)
 		query := productInsertBatchQuery
 		_, err := tx.ExecContext(ctx, query,
-			pgProduct.Id,
 			pgProduct.Create_date,
 			pgProduct.Name,
 			pgProduct.Category,

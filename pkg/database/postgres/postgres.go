@@ -45,6 +45,7 @@ func NewPostgresDB(cfg *Config) (*sqlx.DB, error) {
 	err = db.Ping()
 	if err != nil {
 		log.Errorf("failed to ping postgres db: %s", connectionString)
+		db.Close()
 		return nil, err
 	}
 

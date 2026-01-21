@@ -24,6 +24,7 @@ func RunWeb() {
 			"problem": "NewPostgresDB",
 		}).Fatal(err.Error())
 	}
+	defer db.Close()
 
 	productRepo := postgresRepo.NewProductRepo(db)
 	productService := service.NewProductService(productRepo)
